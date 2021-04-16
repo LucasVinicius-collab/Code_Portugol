@@ -1,0 +1,167 @@
+Algoritmo MAPA-ENG_SOFT_ALGORITMOS_E_LÓGICA_DE_PROGRAMAÇÃO_I _52_2020
+
+Tipo
+	cad_cliente: registro
+		nome: vetor[1..50] de caractere
+   		soma: real
+    		notas: vetor[1..10] de real
+	fim_registro
+//****************************************************
+
+
+funcao preencherRegistro(cliente:vetor[1..20] de cad_cliente): inteiro
+var
+	i, j: inteiro
+	resp: caractere
+
+inicio
+		resp <- 's'
+		enquanto((resp = 's') ou (resp = 'S') e (cont < 20)) faça
+
+			para i de 1 até 20 passo 1 faça
+
+				se((resp = 's') ou (resp = 'S') e (cont<20))então
+
+					escreva("Escreva o nome do cliente: ")
+					leia(cliente[i].nome)
+
+					para j de 1 até 10 passo 1 faça
+
+						escreva("Digite a nota ", j, ":")
+						leia(cliente[i].nota[j])
+						cliente[i].soma <- cliente[i].nota[j] + cliente[i].soma
+
+					fim_para
+
+					escreva("Deseja continuar o cadastro:[s][n]")
+					leia(resp)
+
+					se((resp = 's') ou (resp = 'S')) entao
+
+						cont <- cont + 1
+
+					fim_se
+
+					all <- all + cliente[i].soma
+
+				fim_se
+			fim_para     
+		fim_enquanto
+		
+		se (cont=20) entao
+
+			retorne 1
+
+		senao	
+
+			retorne 0
+
+		fim_se
+fim_funcao
+//****************************************************
+
+procedimento imprimirRegistros(cliente:vetor[1..20] de cad_cliente)
+var
+	i: inteiro
+inicio
+	Escreval("Clientes devedores:")
+		    para i de 1 até cont passo 1 faça
+			
+			escreval(" O cliente", i,":", cliente[i].nome, " deve no total R$:", cliente[i].soma)
+			escreval("O numero de cliente são: ", cont, "total é R$: ", all)
+
+		    fim_para
+fim_procedimento
+
+//****************************************************
+
+funcao buscarRegistro(cliente:vetor[1..20] de cad_cliente): caractere
+var
+	i,j: inteiro
+	busca[1..20]:caractere
+	
+inicio
+	 escreva("Digite o nome que queira buscar: ")			
+	 leia(busca)
+
+		  para i de 1 até cont passo 1 faça
+
+			se(busca = cliente[i].nome)entao
+
+			        escreval("Cliente:", cliente[i].nome)
+
+				para j de 1 ate 10 passo 1 faça
+
+			               escreval("nota", j, ":", cliente[i].notas[j] )
+
+			        fim_para
+
+				escreval("Deve ao total R$: ", cliente[i].soma )
+
+                        senao
+
+				escreval("Nao foi encontrado")
+
+                        fim_se
+		 fim_para		   
+fim_funcao
+//****************************************************
+
+var
+	cliente:vetor[1..20] de cad_cliente
+   	escolh: inteiro
+	all: real
+	cont <- 0:inteiro
+  	 
+
+Inicio
+
+	escreval("Menu")
+
+	escreval("1-Cadastrar clientes;")
+	escreval("2-Listar todos os clientes;")
+	escreval("3-Buscar por cliente;")
+	escreval("4-Sair;")
+
+	escreva("Digite um valor: ")
+	leia(escolh)
+
+	enquanto(escolh <> 4) faça
+
+		caso(escolh)
+
+			seja 1 faça
+
+				preencherRegistro(cliente)
+
+			seja 2 faça
+
+				imprimirRegistros(cliente)
+
+			seja 3 faça
+
+				buscarRegistros(cliente)
+
+			seja 4 faça
+
+				escreva("Saindo do sistema")
+
+			senao
+
+				escreval("Valor incorreto, por favor tente novamente ")
+
+		fim_caso
+
+		escreval("Menu")
+
+    		escreval("1-Cadastrar clientes;")
+    		escreval("2-Listar todos os clientes;")
+    		escreval("3-Buscar por cliente;")
+    		escreval("4-Sair;")
+
+    		escreva("Digite um valor: ")
+    		leia(escolh)	
+
+    	 fim_enquanto
+		
+Fim
